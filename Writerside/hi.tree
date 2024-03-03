@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="hi"
+                 name="Esp32 Arduino API参考"
+                 start-page="preface.md">
+
+    <toc-element topic="preface.md"/>
+    <toc-element toc-title="配置项">
+        <toc-element topic="sdk_preface.md"/>
+    </toc-element>
+</instance-profile>
