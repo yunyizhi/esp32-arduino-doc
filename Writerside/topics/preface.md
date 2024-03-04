@@ -5,13 +5,14 @@ You can use it as a sandbox to play with Writerside features, and remove it from
 If you want to re-add it for your experiments, click + to create a new topic, choose Topic from Template, and select the 
 "Starter" template.-->
 >声明:
-**这不是一份乐鑫官方文档，其中内容不代表官方立场，错误部分和主观部分需要甄别**。<br>
+**这不是一份乐鑫官方文档，其中内容不代表官方立场，错误部分和主观部分需要甄别。**
 
+开始于ESP32 Arduino 2.0.14，可能存在已过时内容。
 ## API分类
 
-<a href="https://github.com/espressif/arduino-esp32">ESP32-Arduino</a>是在
+<a href="https://github.com/espressif/arduino-esp32">ESP32-Arduino</a>是基于
 <a href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/">ESP-IDF</a>
-上对arduino适配而来。
+对arduino适配而来。
 一份ESP32-Arduino 环境下，含有以下api:
 * esp-hal: 在源码cores/esp32目录下。包含兼容arduino通用的api，以及对arduino框架通用api的拓展的部分。
 * Libraries: 在源码libraries目录下,ESP32在Arduino框架下特有的库。这一部分是类似于其他arduino库，以cpp编写，并附了例程。
