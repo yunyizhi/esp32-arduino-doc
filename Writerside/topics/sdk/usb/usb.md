@@ -108,12 +108,11 @@ build_flags =
 
 ## ARDUINO_USB_DFU_ON_BOOT
 
-启动时开启USB DFU（USB Device Firmware Upgrade)。
-<br/>
+启动时开启USB DFU（USB Device Firmware Upgrade)。<br/>
 参考乐鑫文档:
 <a href="https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.1/esp32s3/api-guides/dfu.html#usb">
 通过 USB 升级设备固件</a><br/>
-依赖ARDUINO_USB_MODE为0,也就是需要OTG模式。<br/>
+依赖ARDUINO_USB_MODE为0,也就是需要OTG模式。 
 
 ```Ini
 [env:esp32-s3-devkitc-dfu]
