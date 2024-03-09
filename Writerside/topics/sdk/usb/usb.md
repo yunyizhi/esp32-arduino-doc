@@ -26,7 +26,7 @@ build_flags =
 ```
 
 一些情况下开启后，依然需要使用UART时，可以使用`Serial0.print("Hello World!")`而非
-`Serial.print("Hello World!")`。这样UART0的
+`Serial.print("Hello World!")`。
 C3 使用`HWCDC`做为`Serial`。 S2使用的是另一个类`USBCDC`作为 `Serial`.
 
 ## ARDUINO_USB_MSC_ON_BOOT
