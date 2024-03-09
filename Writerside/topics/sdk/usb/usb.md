@@ -1,12 +1,10 @@
 # USB配置
-
 **需要支持USB功能的esp32芯片**
 
 ## ARDUINO_USB_MODE
-
 设为1则是Hardware CDC and JTag,0则是USB-OTG。<br/>
 S3这种支持设置两种模式。<br/>
-而c3不支持OTG模式,s2不支持JTag模式，一般有正确的默认值一般不用设置.<br>
+而c3不支持OTG模式,s2不支持JTag模式，一般有正确的默认值一般不用设置.<br/>
 ARDUINO_USB_MODE通常会被具体开发板json默认配置，如果需要覆盖默认配置，记得到`board_build.extra_flags`中修改。
 
 ## ARDUINO_USB_CDC_ON_BOOT
@@ -70,8 +68,11 @@ void loop() {
 会出现新的磁盘
 
 <img src="upan.png" alt="USB flash drive"/>
+
 内容如下:
+
 <img src="upan_files.png" alt="USB flash drive"/>
+
 我们将固件拖入该U盘覆盖原有文件即完成更新固件。
 
 ### 相关配置
@@ -107,7 +108,8 @@ build_flags =
 
 ## ARDUINO_USB_DFU_ON_BOOT
 
-启动时开启USB DFU（USB Device Firmware Upgrade)。<br>
+启动时开启USB DFU（USB Device Firmware Upgrade)。
+<br/>
 参考乐鑫文档:
 <a href="https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.1/esp32s3/api-guides/dfu.html#usb">
 通过 USB 升级设备固件</a><br/>
