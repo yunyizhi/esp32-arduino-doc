@@ -12,6 +12,11 @@
             <toc-element topic="log_config.md"/>
             <toc-element topic="psram.md"/>
             <toc-element topic="usb.md"/>
+            <toc-element topic="arduino.md"/>
+            <toc-element topic="serial.md"/>
+        </toc-element>
+        <toc-element topic="general.md">
+
         </toc-element>
     </toc-element>
 </instance-profile>

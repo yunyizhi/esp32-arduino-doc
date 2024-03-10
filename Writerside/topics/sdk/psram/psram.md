@@ -32,7 +32,7 @@ dio_opi  include   lib  opi_qspi  qio_qspi
 例如:esp32-wrover-cam的flash 模式qio， prsam模式qspi
 
 ```Ini
-[env:esp32-s3-devkitc-1]
+[env:esp32-wrover-cam]
 platform = espressif32
 board = esp32dev
 framework = arduino
@@ -42,6 +42,3 @@ board_build.arduino.memory_type = qio_qspi
 build_flags =
     -D BOARD_HAS_PSRAM
 ```
-> 需要完整编译并烧录和监控一次，才会触发下载相关开发板的各种依赖包。
->
-> 可使用命令`pio run -t upload -t monitor`或者在任务树上点击Upload And Monitor
