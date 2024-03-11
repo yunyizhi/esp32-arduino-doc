@@ -1,48 +1,62 @@
 # 通用配置
-## monitor_filters
-该配置项本身在非esp32依然可用，这里仅介绍其中一个可选值
-`esp32_exception_decoder`。(其他选项参考
-<a href="https://bit.ly/pio-monitor-filters">这里</a>)
+由platformio-esp32支持的配置。
 
-**esp32异常栈解码器**
-依赖编译输出的文件夹，可以将经过platformio的串口打印的异常栈十六进制地址，对应异常栈文件夹和行号。
-方便排查问题。
-```Ini
-[env:esp32-s3-devkitc-1]
-platform = espressif32
-board = esp32-s3-devkitc-1
-framework = arduino
-monitor_speed = 115200
-upload_speed = 921600
-monitor_filters =
-    direct
-    esp32_exception_decoder
-build_flags =
-    -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_INFO
-    -D CONFIG_ARDUHAL_LOG_COLORS=1
-```
+## 覆盖开发板配置
+部分配置以`board_`前缀开始,用于覆盖单独开发板的配置。
 
-这里给出一个异常示例:
-```C++
-#include <Arduino.h>
-#include <WiFiClient.h>
 
-void setup()
+参考具体开发板配置:
+<tabs>
+    <tab title="Windows">
+        <code-block lang="plain text">C:\Users\用户名\.platformio\espressif32\boards</code-block>
+    </tab>
+    <tab title="Linux">
+        <code-block lang="plain text">/home/用户名/.platformio/packages/espressif32/boards
+          </code-block>
+    </tab>
+</tabs>
+下方是`esp32dev` (Espressif ESP32 Dev Module)配置json文件。
+如果需要在platformio.ini中覆盖`build`下方的内容，如需要修改flash模式至qio。
+在对应[env:xxx]选项中配置该项:`board_build.flash_mode = qio`
+同理`upload`节点下方同理加上board_前缀:`board_build.flash_size = 8M`
+
+```JSON
 {
-    WiFiClient client;
-    client.connect("192.168.0.1", 80);
+  "build": {
+    "arduino":{
+      "ldscript": "esp32_out.ld"
+    },
+    "core": "esp32",
+    "extra_flags": "-DARDUINO_ESP32_DEV",
+    "f_cpu": "240000000L",
+    "f_flash": "40000000L",
+    "flash_mode": "dio",
+    "mcu": "esp32",
+    "variant": "esp32"
+  },
+  "connectivity": [
+    "wifi",
+    "bluetooth",
+    "ethernet",
+    "can"
+  ],
+  "debug": {
+    "openocd_board": "esp-wroom-32.cfg"
+  },
+  "frameworks": [
+    "arduino",
+    "espidf"
+  ],
+  "name": "Espressif ESP32 Dev Module",
+  "upload": {
+    "flash_size": "4MB",
+    "maximum_ram_size": 327680,
+    "maximum_size": 4194304,
+    "require_upload_port": true,
+    "speed": 460800
+  },
+  "url": "https://en.wikipedia.org/wiki/ESP32",
+  "vendor": "Espressif"
 }
 
-void loop()
-{
-
-}
 ```
-异常场景就是没有连接wifi的时候使用tcp。也就是由第7行触发。
-
-![exception_stack.png](exception_stack.png)
-
-我们可以由异常栈，看到报错的文件和行号。至于其中s2文件夹无需在意其为s2。
-arduino中的idf已经提前编译完成，并非本地的信息。
-
-## board_build.f_cpu

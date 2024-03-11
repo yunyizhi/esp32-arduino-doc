@@ -8,15 +8,18 @@
 
     <toc-element topic="preface.md"/>
     <toc-element toc-title="配置项">
+        <toc-element topic="general.md">
+            <toc-element topic="flash.md"/>
+            <toc-element topic="exception_decoder.md"/>
+            <toc-element topic="build_mcu.md"/>
+            <toc-element topic="build_cpu.md"/>
+        </toc-element>
         <toc-element topic="sdk_preface.md">
             <toc-element topic="log_config.md"/>
             <toc-element topic="psram.md"/>
             <toc-element topic="usb.md"/>
             <toc-element topic="arduino.md"/>
             <toc-element topic="serial.md"/>
-        </toc-element>
-        <toc-element topic="general.md">
-
         </toc-element>
     </toc-element>
 </instance-profile>

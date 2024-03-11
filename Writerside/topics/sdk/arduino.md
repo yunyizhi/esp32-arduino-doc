@@ -3,7 +3,7 @@
 ## ARDUINO_LOOP_STACK_SIZE
 
 loop 函数的栈大小,默认 `8192`。<br/>
-下发例子将其设置为10000。
+下方例子将其设置为10000。
 ```Ini
 [env:esp32-s3-devkitc-loop]
 platform = espressif32
