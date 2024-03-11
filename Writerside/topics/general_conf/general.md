@@ -15,7 +15,8 @@
           </code-block>
     </tab>
 </tabs>
-下方是`esp32dev` (Espressif ESP32 Dev Module)配置json文件。
+
+下方是 `esp32dev` (Espressif ESP32 Dev Module)配置json文件。
 如果需要在platformio.ini中覆盖`build`下方的内容，如需要修改flash模式至qio。
 在对应[env:xxx]选项中配置该项:`board_build.flash_mode = qio`
 同理`upload`节点下方同理加上board_前缀:`board_build.flash_size = 8M`
