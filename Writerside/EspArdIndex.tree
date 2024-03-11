@@ -7,7 +7,7 @@
                  start-page="preface.md">
 
     <toc-element topic="preface.md"/>
-    <toc-element toc-title="配置项">
+    <toc-element topic="config.md">
         <toc-element topic="general.md">
             <toc-element topic="flash.md"/>
             <toc-element topic="exception_decoder.md"/>
