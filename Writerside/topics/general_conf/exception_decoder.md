@@ -44,3 +44,18 @@ void loop()
 
 我们可以由异常栈，看到报错的文件和行号。至于其中s2文件夹无需在意其为s2。
 arduino中的idf已经提前编译完成，并非本地的信息。
+
+## 注意事项
+**这里设置monitor_filters参数，需要在platformio的monitor中使用。使用其他串口监视器无法解码异常栈。**
+
+* vscode
+
+  ![vscode_monitor.png](vscode_monitor.png)
+
+* clion
+
+  ![clion_monitor.png](clion_monitor.png)
+
+* 命令行
+  `pio run -t monitor`
+  >可以指定 env: `pio run -e esp32-s3-devkitc-1 -t monitor`
