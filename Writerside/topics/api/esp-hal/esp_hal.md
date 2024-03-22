@@ -93,4 +93,4 @@ void feedLoopWDT();
 * 微秒数
 unsigned long micros();
 * 毫秒数
-unsigned long micros();
+unsigned long millis();
