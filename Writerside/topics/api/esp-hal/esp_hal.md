@@ -9,7 +9,6 @@
 * void yield(void); 同上
 
 * optimistic_yield(u) 
-* xTaskCreateUniversal
 
 * 启用0核看门狗
     void enableCore0WDT();
@@ -20,6 +19,7 @@
 * 禁用1核看门狗
   void disableCore1WDT();
 
+* xTaskCreateUniversal
 ```C++
  BaseType_t xTaskCreateUniversal( TaskFunction_t pxTaskCode,
 const char * const pcName,
