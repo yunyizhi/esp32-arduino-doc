@@ -9,6 +9,7 @@
     <toc-element topic="preface.md"/>
     <toc-element toc-title="API">
         <toc-element toc-title="esp-hal">
+            <toc-element topic="esp_hal.md"/>
             <toc-element topic="esp_hal_rgb.md"/>
             <toc-element topic="ESP.md"/>
         </toc-element>
