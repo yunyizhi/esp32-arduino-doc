@@ -42,15 +42,18 @@ GPIO状态使用示例:
 ```C++
 #include <Arduino.h>
 
+// 将12 13号引脚放到到同一个MASK里面
+#define LEDS (BIT(12) | BIT(13))
+
 void setup() {
-    REG_WRITE(GPIO_ENABLE_W1TS_REG, BIT(12) | BIT(13));
+    REG_WRITE(GPIO_ENABLE_W1TS_REG, LEDS);
 }
 
 void loop() {
-    REG_WRITE(GPIO_OUT_W1TC_REG, BIT(13) | BIT(12));
+    REG_WRITE(GPIO_OUT_W1TC_REG, LEDS);
     log_i("GPIO_IN_REG %s", String(ESP_REG(GPIO_IN_REG), 2).c_str());
     delay(1000);
-    ESP_REG(GPIO_OUT_W1TS_REG) |= (BIT(12) | BIT(13));
+    ESP_REG(GPIO_OUT_W1TS_REG) |= LEDS;
     log_i("GPIO_IN_REG %s", String(ESP_REG(GPIO_IN_REG), 2).c_str());
     delay(1000);
 }
