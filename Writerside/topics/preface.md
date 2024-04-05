@@ -14,7 +14,7 @@ If you want to re-add it for your experiments, click + to create a new topic, ch
 <a href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/">ESP-IDF</a>
 对arduino适配而来。
 一份ESP32-Arduino 环境下，含有以下api:
-* esp-hal: 在源码cores/esp32目录下。包含兼容arduino通用的api，以及对arduino框架通用api的拓展的部分。
+* esp-hal: 在源码cores/esp32目录下。包含兼容arduino通用的api，以及对arduino框架通用api的拓展以附加部分。
 * Libraries: 在源码libraries目录下,ESP32在Arduino框架下特有的库。这一部分是类似于其他arduino库，以cpp编写，并附了例程。
 * esp-idf api: 在ESP32-Arduino中的idf已经编译完成，提供了`.a`文件和头文件。当需要使用idf相关api，如需要多核执行任务这个时候可以调用idf相关api。
 
