@@ -76,12 +76,7 @@ build_flags =
     -D CONFIG_ARDUHAL_LOG_COLORS=1
 ```
 
-## arduino 延时
-* void delay(uint32_t);
-使用vTaskDelay进行延时，毫秒延时
 
-* void delayMicroseconds(uint32_t us);
-使用NOP()延时(也就是执行NOP指令)
 
 ## arduino loop看门狗
 * 启用loop看门狗

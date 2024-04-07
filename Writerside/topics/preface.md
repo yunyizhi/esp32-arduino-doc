@@ -4,10 +4,11 @@
 You can use it as a sandbox to play with Writerside features, and remove it from the TOC when you don't need it anymore.
 If you want to re-add it for your experiments, click + to create a new topic, choose Topic from Template, and select the 
 "Starter" template.-->
->声明:
+> 声明:
 **这不是一份乐鑫官方文档，其中内容不代表官方立场，错误部分和主观部分需要甄别。**
 
 开始于ESP32 Arduino 2.0.14，可能存在已过时内容。
+
 ## API分类
 
 <a href="https://github.com/espressif/arduino-esp32">ESP32-Arduino</a>是基于
@@ -18,7 +19,9 @@ If you want to re-add it for your experiments, click + to create a new topic, ch
 * Libraries: 在源码libraries目录下,ESP32在Arduino框架下特有的库。这一部分是类似于其他arduino库，以cpp编写，并附了例程。
 * esp-idf api: 在ESP32-Arduino中的idf已经编译完成，提供了`.a`文件和头文件。当需要使用idf相关api，如需要多核执行任务这个时候可以调用idf相关api。
 
-> 在ESP32-Arduino中的idf已编译，虽然大大缩短arduino下编译时间，但有时需要查看源码，可以去<a href="https://github.com/espressif/esp-idf">ESP-IDF</a>
+>
+在ESP32-Arduino中的idf已编译，虽然大大缩短arduino下编译时间，但有时需要查看源码，可以去<a href="https://github.com/espressif/esp-idf">
+ESP-IDF</a>
 > 项目下查看源码。
 >
 >需要注意<a href="https://github.com/espressif/arduino-esp32/releases">ESP32-Arduino发型版本</a>
@@ -38,5 +41,9 @@ If you want to re-add it for your experiments, click + to create a new topic, ch
     <category ref="eaa">
         <a href="https://docs.espressif.com/projects/arduino-esp32/en/latest/">ESP32 Arduino Core’s documentation</a>
         <a href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/">ESP-IDF编程指南</a>
+    </category>
+    <category ref="source">
+        <a href="https://gitee.com/yunyizhi/esp32-arduino-doc">esp32 arduino doc</a>
+        <a href="https://gitee.com/yunyizhi/esp32-arduino-doc/issues">问题反馈</a>
     </category>
 </seealso>
