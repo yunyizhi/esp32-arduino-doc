@@ -19,8 +19,8 @@ If you want to re-add it for your experiments, click + to create a new topic, ch
 * Libraries: 在源码libraries目录下,ESP32在Arduino框架下特有的库。这一部分是类似于其他arduino库，以cpp编写，并附了例程。
 * esp-idf api: 在ESP32-Arduino中的idf已经编译完成，提供了`.a`文件和头文件。当需要使用idf相关api，如需要多核执行任务这个时候可以调用idf相关api。
 
->
-在ESP32-Arduino中的idf已编译，虽然大大缩短arduino下编译时间，但有时需要查看源码，可以去<a href="https://github.com/espressif/esp-idf">
+
+>在ESP32-Arduino中的idf已编译，虽然大大缩短arduino下编译时间，但有时需要查看源码，可以去<a href="https://github.com/espressif/esp-idf">
 ESP-IDF</a>
 > 项目下查看源码。
 >

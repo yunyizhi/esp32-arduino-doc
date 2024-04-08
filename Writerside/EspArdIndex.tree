@@ -24,6 +24,7 @@
             <toc-element topic="exception_decoder.md"/>
             <toc-element topic="build_mcu.md"/>
             <toc-element topic="build_cpu.md"/>
+            <toc-element topic="build_partitions.md"/>
         </toc-element>
         <toc-element topic="sdk_preface.md">
             <toc-element topic="log_config.md"/>
