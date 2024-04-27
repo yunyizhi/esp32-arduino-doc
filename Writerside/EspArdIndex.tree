@@ -12,6 +12,7 @@
             <toc-element topic="esp_hal.md"/>
             <toc-element topic="esp_hal_rgb.md"/>
             <toc-element topic="ESP.md"/>
+            <toc-element topic="log.md"/>
             <toc-element topic="arduino_common.md">
                 <toc-element topic="arduino_time.md"/>
                 <toc-element topic="arduino_tone.md"/>
@@ -34,4 +35,5 @@
             <toc-element topic="serial.md"/>
         </toc-element>
     </toc-element>
+    <toc-element topic="doc_navigation.md"/>
 </instance-profile>
