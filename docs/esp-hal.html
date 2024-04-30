@@ -1,0 +1,54 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2024-04-27T16:53:04.2817148"><title>ESP HAL | Esp32 Arduino API参考</title><script type="application/json" id="virtual-toc-data">[{"id":"freertos","level":0,"title":"FreeRTOS","anchor":"#freertos"},{"id":"-y4s75c_28","level":0,"title":"寄存器","anchor":"#-y4s75c_28"},{"id":"arduino-loop","level":0,"title":"arduino loop看门狗","anchor":"#arduino-loop"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b259/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="ESP HAL | Esp32 Arduino API参考"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Esp32 Arduino API参考 Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/esp-hal.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="ESP HAL | Esp32 Arduino API参考"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/esp-hal.html#webpage",
+    "url": "writerside-documentation/esp-hal.html",
+    "name": "ESP HAL | Esp32 Arduino API参考",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Esp32 Arduino API参考 Help"
+}</script><!-- End Schema.org --></head><body data-id="esp_hal" data-main-title="ESP HAL" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="API///esp-hal"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Esp32 Arduino API参考  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="esp_hal" id="esp_hal.md">ESP HAL</h1><aside class="prompt" data-type="tip" data-title="" id="-y4s75c_2"><p id="-y4s75c_3">该文件提供函数，本人另做分类，有些会合并到其他页面，不在该页面体现。</p></aside><section class="chapter"><h2 id="freertos" data-toc="freertos">FreeRTOS</h2><p id="-y4s75c_4">在esp-hal.h中提供rtos api的只是一部分，也只是封装了idf api，也直接可以使用idf中的rtos api。</p><ul class="list _bullet" id="-y4s75c_5"><li class="list__item" id="-y4s75c_6"><p id="-y4s75c_7">void vPortYield(void); 当前线程会让出当前 CPU 的使用权，让优先级更高的任务得到执行。</p></li><li class="list__item" id="-y4s75c_8"><p id="-y4s75c_9">void yield(void); 同上</p></li><li class="list__item" id="-y4s75c_10"><p id="-y4s75c_11">optimistic_yield(u)</p></li><li class="list__item" id="-y4s75c_12"><p id="-y4s75c_13">启用0核看门狗 void enableCore0WDT();</p></li><li class="list__item" id="-y4s75c_14"><p id="-y4s75c_15">禁用0核看门狗 void disableCore0WDT();</p></li><li class="list__item" id="-y4s75c_16"><p id="-y4s75c_17">启用1核看门狗 void enableCore1WDT();</p></li><li class="list__item" id="-y4s75c_18"><p id="-y4s75c_19">禁用1核看门狗 void disableCore1WDT();</p></li><li class="list__item" id="-y4s75c_20"><p id="-y4s75c_21">xTaskCreateUniversal</p></li></ul><div class="code-block" data-lang="cpp">
+ BaseType_t xTaskCreateUniversal( TaskFunction_t pxTaskCode,
+const char * const pcName,
+const uint32_t usStackDepth,
+void * const pvParameters,
+UBaseType_t uxPriority,
+TaskHandle_t * const pxCreatedTask,
+const BaseType_t xCoreID );
+</div><p id="-y4s75c_23">创建一个任务，可以适应arduino下单核或者多核，在<code class="code" id="-y4s75c_24">CONFIG_FREERTOS_UNICORE</code>为1时， 会忽略<code class="code" id="-y4s75c_25">xCoreID</code> ，使用<code class="code" id="-y4s75c_26">xTaskCreate</code>否则使用<code class="code" id="-y4s75c_27">xTaskCreatePinnedToCore</code>。</p></section><section class="chapter"><h2 id="-y4s75c_28" data-toc="-y4s75c_28">寄存器</h2><ul class="list _bullet" id="-y4s75c_29"><li class="list__item" id="-y4s75c_30"><p>ESP_REG 可以读写寄存器。 GPIO状态使用示例: <code class="code" id="-y4s75c_31">ESP_REG(GPIO_IN_REG)</code> 当然在soc.h也提供类似功能。以下是一个使用寄存器点合宙c3两个板载LED灯的示例:</p></li></ul><div class="code-block" data-lang="cpp">
+#include &lt;Arduino.h&gt;
+
+// 将12 13号引脚放到到同一个MASK里面
+#define LEDS (BIT(12) | BIT(13))
+
+void setup() {
+    REG_WRITE(GPIO_ENABLE_W1TS_REG, LEDS);
+}
+
+void loop() {
+    REG_WRITE(GPIO_OUT_W1TC_REG, LEDS);
+    log_i(&quot;GPIO_IN_REG %s&quot;, String(ESP_REG(GPIO_IN_REG), 2).c_str());
+    delay(1000);
+    ESP_REG(GPIO_OUT_W1TS_REG) |= LEDS;
+    log_i(&quot;GPIO_IN_REG %s&quot;, String(ESP_REG(GPIO_IN_REG), 2).c_str());
+    delay(1000);
+}
+ 
+</div><p id="-y4s75c_33">这里同时提供<code class="code" id="-y4s75c_34">ESP_REG</code>和<code class="code" id="-y4s75c_35">REG_WRITE</code>操作引脚的示例。</p><p id="-y4s75c_36">由于存在无USB转串口芯片版本，这里打开日志，则不需要关注串口是否是虚拟。 配置如下:</p><div class="code-block" data-lang="ini">
+[env:esp32c3]
+platform = espressif32
+board = airm2m_core_esp32c3
+framework = arduino
+upload_speed = 921600
+monitor_filters =
+    direct
+build_flags =
+    -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_INFO
+    -D CONFIG_ARDUHAL_LOG_COLORS=1
+</div></section><section class="chapter"><h2 id="arduino-loop" data-toc="arduino-loop">arduino loop看门狗</h2><ul class="list _bullet" id="-y4s75c_38"><li class="list__item" id="-y4s75c_39"><p>启用loop看门狗 void enableLoopWDT();</p></li><li class="list__item" id="-y4s75c_40"><p>禁用loop看门狗 void disableLoopWDT();</p></li><li class="list__item" id="-y4s75c_41"><p>loop任务喂狗 void feedLoopWDT();</p></li></ul></section><div class="last-modified">Last modified: 27 四月 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="preface.html" class="navigation-links__prev">前言</a><a href="esp-hal-rgb.html" class="navigation-links__next">rgb灯</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b259/app.js"></script></body></html>
