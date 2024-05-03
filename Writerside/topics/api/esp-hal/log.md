@@ -45,6 +45,7 @@ build_flags =
 ```
 
 效果如下:
+
 ![log_x](log_x.png)
 
 可以看到log_n打印的颜色和级别是log error.但log_n在未配置日志级别时，依然会打印。
