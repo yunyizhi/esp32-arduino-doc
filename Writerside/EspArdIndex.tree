@@ -16,6 +16,7 @@
             <toc-element topic="arduino_common.md">
                 <toc-element topic="arduino_time.md"/>
                 <toc-element topic="arduino_tone.md"/>
+                <toc-element topic="arduino_variant.md"/>
             </toc-element>
         </toc-element>
     </toc-element>
