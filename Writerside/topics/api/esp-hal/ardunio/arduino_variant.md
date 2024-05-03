@@ -4,7 +4,7 @@
 部分开发板的`D1` `D2`这种常量，就是定义在Arduino variant中具体开发板目录下。其中包含了具体开发板的一些配置。
 
 选择了正确的开发板，之后大部分情况下，我们可以使用 `RGB_BUILTIN`, `LED_BUILTIN`等常量，在一些未定义的场景，比如直接使用I2C,
-I2C引脚也会有`SDA` `SCL`默认值，则是 Arduino variant的定义。
+I2C引脚也会有`SDA` `SCL`默认值，则都是 Arduino variant的定义。
 
 除了引脚外，Arduino variant也可能包含一些开发板特有的内容。
 
