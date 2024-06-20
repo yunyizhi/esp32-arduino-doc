@@ -37,6 +37,7 @@
             <toc-element topic="serial.md"/>
         </toc-element>
     </toc-element>
+    <toc-element topic="debug.md"/>
     <toc-element topic="doc_navigation.md"/>
 
 </instance-profile>
