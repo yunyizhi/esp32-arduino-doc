@@ -18,6 +18,8 @@
                 <toc-element topic="arduino_time.md"/>
                 <toc-element topic="arduino_tone.md"/>
                 <toc-element topic="arduino_digital_io.md"/>
+                <toc-element topic="stream_print.md"/>
+                <toc-element topic="serial_and_cdc.md"/>
             </toc-element>
         </toc-element>
     </toc-element>

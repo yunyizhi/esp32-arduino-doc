@@ -54,7 +54,7 @@ build_flags =
 idf中的日志接口，在`esp_log.h`中提供.一般来说，arduino-esp32库不会使用该接口，但依然可以在arduino-esp32调用，如果需要移植idf例程，或者使用idf组件库，
 同样可以参考后文[日志配置](log_config.md)，对ESP LOG的日志级别进行控制。
 
->使用方式类似 hal-log,需要传入一个TAG<br>
+> 使用方式类似 hal-log,需要传入一个TAG<br/>
 >`ESP_LOGI(TAG, "flash size:%u", ESP.getFlashChipSize());`
 
 ```C++
