@@ -61,6 +61,7 @@ upload_speed = 921600
 #### 使用clion点击debug一键调试
 
 s3需要将usb jtag口连接至pc,而合宙esp32c3只有一个usb口便是jtag。
+
 ![clion_debug.png](clion_debug.png)
 
 #### clion操作外设寄存器
@@ -86,6 +87,7 @@ s3需要将usb jtag口连接至pc,而合宙esp32c3只有一个usb口便是jtag�
 外设这里只有读取和复制值等功能
 
 可以复制寄存器地址到gdb控制台进行操作
+
 ![clion_reg_copy.png](clion_reg_copy.png)
 
 
@@ -127,6 +129,7 @@ set {uint32_t } 0x6000400c |= (1 << 2)
 #### esp32s3 arduino ide 菜单配置
 
 设置USB模式为JTAG, JTAG Adaptor选择`Integrated USB JTAG` 便可用内置jtag 调试
+
 ![s3_debug_config.png](s3_debug_config.png)
 
 #### 开始调试

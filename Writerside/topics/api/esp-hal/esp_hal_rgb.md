@@ -3,6 +3,8 @@
 
 我们可以使用`esp32-hal-rgb-led.h`提供的`neopixelWrite`函数对该rgb灯引脚写入颜色。
 
+该函数会编码一段波形配置，使用esp32的rmt外设发送对应波形。
+
 比如 若rgb灯对应48号引脚，第一个参数为48 后三个参数是rgb值。分别对应红绿蓝，uint8 取0~255。
 如红色`neopixelWrite(48, 255, 0, 0);`
 
