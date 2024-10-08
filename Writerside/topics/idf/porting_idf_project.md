@@ -4,7 +4,7 @@ arduino-esp32 本身可以算一个idf项目， 依然从app_main启动。
 
 其中包含了ESP-IDF 项目components下的部分源码已经编译得到的静态库。
 
->由于部分内容已经编译完成，一些sdkconfig在这次编译时已经生效，对应.a文件已经生成。后续的编译arduino项目idf源码不会重新编译。
+>由于部分内容已经编译完成，一些sdkconfig在这次编译时已经生效，对应.a文件已经生成。在编译arduino项目编译过程，不含idf源码编译。
 > 所以在编译arduino项目修改针对已编译内容的sdkconfig项是没有作用的，
 > 如果希望同时修改编译IDF项目的配置也想使用arduino的库，那也可以把arduino作为idf项目组件。
 
@@ -16,6 +16,7 @@ arduino-esp32 本身可以算一个idf项目， 依然从app_main启动。
 * cpp与c调用问题
 * idf组件尤其是其cmake配置问题
 * idf日志(基本上兼容，只需要简单配置)
+* Menuconfig 配置移植问题
 
 >由于arduino ide限制，修改一些编译参数可能需要到安装arduino-esp32目录或者arduino本身目录进行全局操作。
 这里使用platformio下arduino框架来移植esp-idf项目.
@@ -37,6 +38,7 @@ arduino-esp32 本身可以算一个idf项目， 依然从app_main启动。
 这里是国内下载站，正常网络即可下载，随后一键安装到无空格路径的下。
 
 安装时默认已经勾选了创建桌面的命令行工具的快捷方式
+
 ![idf_poweshell.png](idf_poweshell.png)
 
 我们可以双击打开对应的快捷方式，会自动配置idf环境，即可通过命令行编译烧录等一系列操作。
@@ -127,16 +129,16 @@ cd examples/peripherals/usb/host/msc
 
 在当前命令行执行 `idf.py set-target esp32s3`
 
-其实这一步会触发cmake加载，此时已经正常了之后组件也下载完成的了。
+其实这一步会触发cmake加载，执行成功后，此时组件也下载完成了。
 
 如果想要验证是否正常，可以使用`idf.py flash` 或者  `idf.py flash -p 端口号`直接烧录到 esp32
 
-使用idf.py monitor监控 串口打印。
+使用`idf.py monitor`监控 串口打印。也可合并为一句 `idf.py flash monitor`
 
 ### 复制源码拷贝组件
 
 #### 1.拷贝源码
-新建一个esp32s3的platformio arduino项目项目，将msc项目的main目录下的源文件msc_example_main.c拷贝到
+新建一个esp32s3的platformio arduino项目，将msc项目的main目录下的源文件msc_example_main.c拷贝到
 platformio项目的src下。
 
 #### 2.拷贝组件 {id="copy_comp"}
@@ -145,15 +147,29 @@ platformio项目的src下。
 
 该组件正常的源码和include路径基本符合platformio要求的lib结构，但不能直接使用。
 
-#### 3.源码适配修改
+#### 3.源码适配修改 {id="src_compat"}
 
 在main.cpp中将idf例程拉起来，由于arduino的app_main这个入口已被占用，需要给原来的idf例程的app_main改名。
 
 比如改成 `void start()` 。
 
-当前需要通过cpp调用c,这里将void start()也提到头文件中，并使用 extern "C" 包起这个声明。
- 总体格式如下:
-```cpp
+当前需要通过cpp调用c,这里将void start()也提到头文件中，cpp调用c需要使用 extern "C" 包起相关C的声明。
+
+可以头文件中看到一些通常的做法是
+```C++
+#ifdef __cplusplus
+extern "C" {
+#endif
+ // 此处是c 的声明
+#ifdef __cplusplus
+}
+#endif
+```
+用于兼容c和cpp调用。
+
+仿造这种写法总体格式如下:
+
+```C++
 
 #ifndef USB_HOST_MSC_MSC_EXAMPLE_IDF_H
 #define USB_HOST_MSC_MSC_EXAMPLE_IDF_H
@@ -171,6 +187,7 @@ void start();
 
 #endif // USB_HOST_MSC_MSC_EXAMPLE_IDF_H
 ```
+>关于加入`#include <Arduino.h>` 这一个后续会解释
 
 以当前内容新建一个`msc_example_main.h`然后在main.cpp中调用
 ```C++
@@ -190,8 +207,77 @@ void loop() {
 
 #### 4.lib编译参数修改
 
+我们将组件拷到platformio的lib目录下 platformio会将include文件夹自动作为include path，将其他源文件作为源码，
 
+经过测试会忽略名为test的文件夹，但部分idf组件 会以test_app放入一些非组件本身的源码，也会被platformio当成源文件路径。
 
+这里只能手动重新命名或者去掉。
 
+然后需要查看库的CMakeLists.txt文件。回到当前msc 例程。
 
+使用的库
+```CMake
+set(sources src/msc_scsi_bot.c
+            src/diskio_usb.c
+            src/msc_host.c
+            src/msc_host_vfs.c)
 
+idf_component_register( SRCS ${sources}
+                        INCLUDE_DIRS include include/usb # 'include/usb' is here for backwards compatibility
+                        PRIV_INCLUDE_DIRS private_include include/esp_private
+                        REQUIRES usb fatfs
+                        PRIV_REQUIRES heap )
+```
+
+发现src下是源文件 include和 include/usb 文件夹是 include 目录 此外还有 private_include include/esp_private
+
+两个私有的include路径。为了不对该组件源码大改，我们在platformio.ini中追加这两个private_include的路径让编译器也可以从其中找头文件。
+
+在platformio.ini中具体env下的build_flags中可以加gcc参数。
+```ini
+[env:esp32-s3-devkitc-1]
+platform = espressif32
+board = esp32-s3-devkitc-1
+framework = arduino
+build_flags =
+    -I lib/espressif__usb_host_msc/include/esp_private
+    -I lib/espressif__usb_host_msc/private_include
+```
+
+### IDF日志配置 {id="idf_log"}
+IDF使用的日志宏在arduino中可以正常编译，但如果不配置日志可能不会打印和相应在IDF中的日志颜色。
+
+>另外在目前platformio基于arduino-esp32 2.0.1x版本中 使用IDF日志API虽然导入了esp log相关头文件也不能输出日志，
+需要加`#include <Arduino.h>`，这也是在上述[第三步](#src_compat)中加入这句的原因。
+
+配置arduino-esp32的日志适用于原有的IDF日志可参考[日志配置](log_config.md)
+
+这里我将日志设置为info级别并打开颜色码(日志颜色码不希望被platformio处理，搭配monitor_filters中的direct便可显色)。
+```ini
+[env:esp32-s3-devkitc-1]
+platform = espressif32
+board = esp32-s3-devkitc-1
+framework = arduino
+monitor_filters =
+    direct
+build_flags =
+    -I lib/espressif__usb_host_msc/include/esp_private
+    -I lib/espressif__usb_host_msc/private_include
+    -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_INFO
+    -D CONFIG_ARDUHAL_LOG_COLORS=1
+```
+
+### MenuConfig 移植
+这里引入的组件或者例程有Kconfig情况下，sdkconfig会出现一些新的内容。
+
+比如CONFIG_EXAMPLE_XXXX 等，这些我们一律使用build_flags处理。
+
+将源码中CONFIG_EXAMPLE_XXXX的宏加到build_flags中如
+`-D CONFIG_EXAMPLE_XXXX=1`
+
+如果是特殊项目组件里面有大量配置，我们直接去sdkconfig中复制出来并加 -D。
+
+### idf_component_register 的 REQUIRES处理
+组件的cmake中idf_component_register 可能含`REQUIRES` 项，我们需要把idf源码中 未打包打包的到arduino的组件拷到lib中，同样对其进行配置。
+
+可能依然存在其他问题。实在无法解决情况下可以选择使用idf下将arduino作为组件引入。

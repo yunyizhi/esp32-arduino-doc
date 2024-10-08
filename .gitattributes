@@ -4,4 +4,3 @@
 *.bat text eol=crlf
 *.properties text eol=crlf
 *.xml text eol=crlf
-*.html eol=crlf
