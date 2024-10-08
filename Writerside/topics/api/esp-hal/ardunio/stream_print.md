@@ -18,3 +18,18 @@ write 相关是字节写出。
 ### Stream
 Stream 继承了Print 主要增加了读出数据的和相关处理的函数，可以读出数据并转化为相应类型，进行查找等相关操作。
 
+需要子类实现这些虚函数
+* int available();
+* int read()
+* int peek()
+
+提供了同一的读出和处理相关函数如：
+
+* size_t readBytesUntil(char terminator, uint8_t *buffer, size_t length)
+* String readString()
+* String readStringUntil(char terminator)
+* find
+
+具体参考具体版本源码 大体上会满足 arduino通用的 [Stream](https://www.arduino.cc/reference/en/language/functions/communication/serial/)
+
+在使用串口 TCP UDP通讯 文件对象时 均可使用Stream相关API进行字符或者字节操作。
