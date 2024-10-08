@@ -6,7 +6,7 @@ arduino-esp32 本身可以算一个idf项目， 依然从app_main启动。
 
 >由于部分内容已经编译完成，一些sdkconfig在这次编译时已经生效，对应.a文件已经生成。在编译arduino项目编译过程，不含idf源码编译。
 > 所以在编译arduino项目修改针对已编译内容的sdkconfig项是没有作用的，
-> 如果希望同时修改编译IDF项目的配置也想使用arduino的库，那也可以把arduino作为idf项目组件。
+> 如果希望同时修改用于编译IDF本身的配置也想使用arduino的库，那也可以把arduino作为idf项目组件。
 
 ## 开发框架的差异性
 
