@@ -41,5 +41,6 @@
     </toc-element>
     <toc-element topic="debug.md"/>
     <toc-element topic="doc_navigation.md"/>
+    <toc-element topic="porting_idf_project.md"/>
 
 </instance-profile>
