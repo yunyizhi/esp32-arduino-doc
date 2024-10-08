@@ -155,7 +155,7 @@ platformio项目的src下。
 
 当前需要通过cpp调用c,这里将void start()也提到头文件中，cpp调用c需要使用 extern "C" 包起相关C的声明。
 
-可以头文件中看到一些通常的做法是
+可以在一些头文件中看到通常的做法是以下格式
 ```C++
 #ifdef __cplusplus
 extern "C" {
@@ -278,6 +278,7 @@ build_flags =
 如果是特殊项目组件里面有大量配置，我们直接去sdkconfig中复制出来并加 -D。
 
 ### idf_component_register 的 REQUIRES处理
-组件的cmake中idf_component_register 可能含`REQUIRES` 项，我们需要把idf源码中 未打包打包的到arduino的组件拷到lib中，同样对其进行配置。
+组件的cmake中idf_component_register 可能含`REQUIRES` 项，但很多时候arduino打包的时候已经包含，不必额外追加，但有些情况，比如需要被`REQUIRES`
+的IDF源码中组件的private include目录，这种可能在arduino中无法引用到，这个时候需要再从idf源码中把这个组件拷到lib下。然后再进行配置。
 
 可能依然存在其他问题。实在无法解决情况下可以选择使用idf下将arduino作为组件引入。
