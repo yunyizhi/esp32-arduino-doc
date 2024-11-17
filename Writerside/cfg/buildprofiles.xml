@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <variables>
+        <feedback-url>https://github.com/yunyizhi/esp32-arduino-doc/issues</feedback-url>
+        <showDownloadButton>true</showDownloadButton>
+        <primary-color>#820E0E</primary-color>
+        <header-logo>esp32.svg</header-logo>
+        <custom-favicons>esp32.svg</custom-favicons>
+    </variables>
+
+    <shortcuts>
+        <src>keymap.xml</src>
+        <layout name="Windows" display-name="Windows"/>
+        <layout name="macOS" display-name="macOS"/>
+        <layout name="GNOME" display-name="Linux"/>
+    </shortcuts>
+
+    <footer>
+        <link href="https://github.com/yunyizhi/esp32-arduino-doc/issues">问题反馈</link>
+    </footer>
+
+    <build-profile instance="wrs">
+        <sitemap priority="0.35" change-frequency="monthly"/>
+    </build-profile>
+</buildprofiles>
